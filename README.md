@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the official implementation of **"Collaborative Guided Diffusion: High-Fidelity Synthesis for Enhanced Industrial Defect Detection"** submitted to *The Visual Computer* journal.
+This repository contains the official implementation of **"Collaborative Guided Diffusion: High-Fidelity Synthesis for Enhanced Industrial Defect Detection".
 
 ![CGD Framework](data/framework.png)
 *Figure 1: The overall architecture of the Collaborative Guided Diffusion (CGD) framework.*
@@ -127,7 +127,7 @@ Please cite our work if you find this code useful for your research:
 @article{luo2025cgd,
   title={Collaborative Guided Diffusion: High-Fidelity Synthesis for Enhanced Industrial Defect Detection},
   author={Luo, Weihang and Huang, Xindong and Chao, Fei and Chang, Xiang and Shi, Hua and Zhang, Hongyi and Jiang, Huali and Gao, Xingen},
-  journal={The Visual Computer},
+  journal={The Journal of Supercomputing},
   year={2025},
   note={Under review}
 }
