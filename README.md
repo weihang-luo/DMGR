@@ -127,7 +127,7 @@ Please cite our work if you find this code useful for your research:
 @article{luo2025cgd,
   title={Collaborative Guided Diffusion: High-Fidelity Synthesis for Enhanced Industrial Defect Detection},
   author={Luo, Weihang and Huang, Xindong and Chao, Fei and Chang, Xiang and Shi, Hua and Zhang, Hongyi and Jiang, Huali and Gao, Xingen},
-  journal={The Journal of Supercomputing},
+  journal={},
   year={2025},
   note={Under review}
 }
