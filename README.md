@@ -1,17 +1,17 @@
-# Collaborative Guided Diffusion (CGD)
+# Dual-Manifold Score Composition (DMSC)
 
 ## Overview
 
-This repository contains the official implementation of **"Collaborative Guided Diffusion: High-Fidelity Synthesis for Enhanced Industrial Defect Detection".
+This repository contains the official implementation of **"Dual-Manifold Score Composition: High-Fidelity Synthesis for Enhanced Industrial Defect Detection"**.
 
-![CGD Framework](data/framework.png)
-*Figure 1: The overall architecture of the Collaborative Guided Diffusion (CGD) framework.*
+![DMSC Framework](data/framework.png)
+*Figure 1: The overall architecture of the Dual-Manifold Score Composition (DMSC) framework.*
 
 ### Key Contributions
 
-- **Collaborative Modeling Scheme**: Integrates a specialized local defect model trained on patches with a global context model to capture fine-grained defect features while preserving background consistency.
-- **Dynamic Semantic Control Strategy**: Employs multi-scale guidance and adaptive spatial masking to ensure seamless defect integration into complex industrial backgrounds.
-- **Multi-Stage Guidance Scheduling**: Balances early structural stability with late-stage texture fidelity through adaptive gradient modulation across the denoising trajectory.
+- **Dual-Manifold Score Composition**: Reformulates the generation process as constrained sampling at the intersection of the global background manifold and the local defect manifold. A dual-stream score estimation mechanism explicitly decomposes the gradient field, enabling precise injection of defect morphologies while preserving background regularity.
+- **Spectral-Temporal Trajectory Rectification**: Enforces physical consistency through spectral-temporal trajectory rectification, which aligns high-frequency spectral components while adapting to spatial uncertainty.
+- **Asymmetric Collaborative Evolution**: A dynamic modulation strategy is employed to dynamically modulate the interaction between structural anchoring and textural resonance throughout the generative trajectory.
 
 ## Installation
 
@@ -24,6 +24,8 @@ This repository contains the official implementation of **"Collaborative Guided 
 ### Pre-trained Models
 
 You need to download the following pre-trained models and place them in the `checkpoint/` directory:
+
+**Note**: If you want to use your own dataset, you can train custom models based on the [OpenAI guided-diffusion](https://github.com/openai/guided-diffusion) library and adjust the corresponding configuration parameters accordingly.
 
 #### 1. Global Context Model (global-256.pt)
 
@@ -59,16 +61,6 @@ checkpoint/
 └── defect-patch-64.pt     # Local defect patch model
 ```
 
-## Dataset
-
-The dataset can be found at the following source:
-
-[Dataset Source](https://robotics.pkusz.edu.cn/resources/dataset/)
-
-**Note**: If you want to use your own dataset, you can train custom models based on the [OpenAI guided-diffusion](https://github.com/openai/guided-diffusion) library and adjust the corresponding configuration parameters accordingly.
-
-
-
 ## Quick start
 
 1) Verify checkpoints are in checkpoint/.
@@ -99,7 +91,7 @@ CGD/
 ├── confs/                      # Configuration files
 │   └── pcb_gen.yml            # Main config
 ├── guided_diffusion/           # Core implementation
-│   ├── ddim.py                # CGD sampler implementation
+│   ├── ddim.py                # DMSC sampler implementation
 │   ├── script_util.py         # Utility functions
 │   ├── gaussian_diffusion.py  # Base diffusion model
 │   └── unet.py                # U-Net architecture
@@ -114,7 +106,7 @@ CGD/
 │   ├── global-256.pt          # Global context model
 │   └── defect-patch-64.pt     # Local defect model
 └── images/                     # Generated outputs
-    └── fj_ddim/               # CGD results
+    └── fj_ddim/               # DMSC results
 ```
 
 ## Citation and License
@@ -124,18 +116,14 @@ CGD/
 Please cite our work if you find this code useful for your research:
 
 ```bibtex
-@article{luo2025cgd,
-  title={Collaborative Guided Diffusion: High-Fidelity Synthesis for Enhanced Industrial Defect Detection},
-  author={Luo, Weihang and Huang, Xindong and Chao, Fei and Chang, Xiang and Shi, Hua and Zhang, Hongyi and Jiang, Huali and Gao, Xingen},
-  journal={},
+@article{luo2025dmsc,
+  title={Dual-Manifold Score Composition: High-Fidelity Synthesis for Enhanced Industrial Defect Detection},
+  author={Luo, Weihang and Huang, Jianxiongwen and Zhang, Zhijie and Zhang, Hongyi and Jiang, Huali and Gao, Xingen},
+  journal={Sensors},
   year={2025},
-  note={Under review}
+  publisher={MDPI}
 }
 ```
 
-### License
 
 This project is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license. The code is released for academic research use only. For commercial use, please contact the authors.
-
-
-
