@@ -1,129 +1,35 @@
-# Dual-Manifold Score Composition (DMSC)
-
-## Overview
-
-This repository contains the official implementation of **"Dual-Manifold Score Composition: High-Fidelity Synthesis for Enhanced Industrial Defect Detection"**.
-
-![DMSC Framework](data/framework.png)
-*Figure 1: The overall architecture of the Dual-Manifold Score Composition (DMSC) framework.*
-
-### Key Contributions
-
-- **Dual-Manifold Score Composition**: Reformulates the generation process as constrained sampling at the intersection of the global background manifold and the local defect manifold. A dual-stream score estimation mechanism explicitly decomposes the gradient field, enabling precise injection of defect morphologies while preserving background regularity.
-- **Spectral-Temporal Trajectory Rectification**: Enforces physical consistency through spectral-temporal trajectory rectification, which aligns high-frequency spectral components while adapting to spatial uncertainty.
-- **Asymmetric Collaborative Evolution**: A dynamic modulation strategy is employed to dynamically modulate the interaction between structural anchoring and textural resonance throughout the generative trajectory.
-
-## Installation
-
-- Python 3.8+ recommended
-- PyTorch (CUDA recommended). Install the version matching your CUDA. If you see an error about weights_only when loading checkpoints, upgrade PyTorch to a recent 2.x release.
-- Other Python packages: numpy, pyyaml, pillow, matplotlib
-
-## Model Checkpoints
-
-### Pre-trained Models
-
-You need to download the following pre-trained models and place them in the `checkpoint/` directory:
-
-**Note**: If you want to use your own dataset, you can train custom models based on the [OpenAI guided-diffusion](https://github.com/openai/guided-diffusion) library and adjust the corresponding configuration parameters accordingly.
-
-#### 1. Global Context Model (global-256.pt)
-
-This model is used for the global context or first-stage processing.
-
-- **Filename**: `global-256.pt`
-- **Download Link**: [Download from Google Drive](https://drive.google.com/uc?export=download&id=1axJMm0fpg0v2HIApxz0IIaY0WTDKalCH)
-
-You can download it directly using the command line:
-
-```bash
-wget -O checkpoint/global-256.pt "https://drive.google.com/uc?export=download&id=1axJMm0fpg0v2HIApxz0IIaY0WTDKalCH"
-```
-
-#### 2. Defect Patch Model (defect-patch-64.pt)
-
-This model is used for fine-grained defect analysis on patches.
-
-- **Filename**: `defect-patch-64.pt`
-- **Download Link**: [Download from Google Drive](https://drive.google.com/uc?export=download&id=1GHT-q1XjF_aCmInp_g5gMruX3yih-iyM)
-
-You can download it directly using the command line:
-
-```bash
-wget -O checkpoint/defect-patch-64.pt "https://drive.google.com/uc?export=download&id=1GHT-q1XjF_aCmInp_g5gMruX3yih-iyM"
-```
-
-### Directory Structure After Setup
-
-```bash
-checkpoint/
-├── global-256.pt          # Global context model
-└── defect-patch-64.pt     # Local defect patch model
-```
-
-## Quick start
-
-1) Verify checkpoints are in checkpoint/.
-2) Use the provided config confs/pcb_gen.yml (FJ-DDIM sampler by default).
-3) Run synthesis:
-
-```bash
-python Gen.py --conf_path confs/pcb_gen.yml
-```
-
-Outputs will be saved under images/fj_ddim/:
-
-- images/fj_ddim/samples/: generated samples
-- images/fj_ddim/gird/: grids of intermediate predictions
-- images/fj_ddim/crop/: defect patch crops
-
-Reproducibility: pcb_gen.yml sets a fixed seed and enables deterministic modes in CUDA (see Gen.py), but minor nondeterminism may remain depending on your driver/BLAS settings.
-
-### Configuration
-
-The main configuration file is `confs/pcb_gen.yml`.
-
-## Project Structure
-
-```text
-CGD/
-├── Gen.py                      # Main generation script
-├── confs/                      # Configuration files
-│   └── pcb_gen.yml            # Main config
-├── guided_diffusion/           # Core implementation
-│   ├── ddim.py                # DMSC sampler implementation
+Dual-Manifold Gradient Rectification (DMGR)OverviewThis repository contains the official implementation of "Dual-Manifold Gradient Rectification: Reconciling Topology and Texture in Industrial Anomaly Synthesis", published in IEEE Access.Figure 1: The overall architecture of the Dual-Manifold Gradient Rectification (DMGR) framework.Key ContributionsThe reliability of automated industrial defect detection is often constrained by the scarcity of anomalous samples and the topological-textural conflict between defects and background. To address this, DMGR introduces:Dual-Manifold Gradient Rectification (DMGR): Unlike prior approaches that rely on heuristic blending or monolithic inpainting, DMGR reformulates defect synthesis as a deterministic trajectory rectification process. It explicitly models the interaction between a Global Background Manifold (Base Structural Field) and a Local Defect Manifold (Rectification Field).Physics-Grounded Spectral-Spatial Alignment: We introduce a Dynamic Multi-Scale Loss and an Uncertainty-Adaptive Spatial Gating mechanism. These ensure that high-frequency defect details are injected into the global trajectory without violating the spectral and spatial consistency of the background.Asymmetric Collaborative Evolution: A dynamic gradient scheduling strategy that coordinates Structural Anchoring (in early diffusion stages) and Textural Resonance (in later stages) to effectively harmonize global topology with local defect fidelity.Experimental results on a PCB defect dataset demonstrate that DMGR achieves superior semantic coherence and yields a 10.3% relative improvement in the downstream detector's mean Average Precision (mAP).InstallationPython 3.8+ recommendedPyTorch (CUDA recommended).Dependencies: numpy, pyyaml, pillow, matplotlibModel CheckpointsPre-trained ModelsPlease download the following pre-trained models and place them in the checkpoint/ directory. These models correspond to the dual manifolds described in the paper.1. Global Manifold Model (Base Structural Field)This model (Global U-Net) establishes the defect-free structural topology.Filename: global-256.ptDownload Link: Download from Google Drivewget -O checkpoint/global-256.pt "[https://drive.google.com/uc?export=download&id=1axJMm0fpg0v2HIApxz0IIaY0WTDKalCH](https://drive.google.com/uc?export=download&id=1axJMm0fpg0v2HIApxz0IIaY0WTDKalCH)"
+2. Local Defect Model (Rectification Field Source)This model (Local U-Net) provides the expert reference for defect morphology.Filename: defect-patch-64.ptDownload Link: Download from Google Drivewget -O checkpoint/defect-patch-64.pt "[https://drive.google.com/uc?export=download&id=1GHT-q1XjF_aCmInp_g5gMruX3yih-iyM](https://drive.google.com/uc?export=download&id=1GHT-q1XjF_aCmInp_g5gMruX3yih-iyM)"
+Directory Structure After Setupcheckpoint/
+├── global-256.pt          # Global Background Manifold model
+└── defect-patch-64.pt     # Local Defect Manifold model
+Quick StartVerify Checkpoints: Ensure the model files are located in the checkpoint/ folder.Configuration: Use the provided config file confs/pcb_gen.yml.Run Synthesis:python Gen.py --conf_path confs/pcb_gen.yml
+Outputs will be saved under the images/dmgr/ directory:images/dmgr/samples/: Final synthesized defect samples.images/dmgr/grid/: Visualization grids showing the rectification process steps.images/dmgr/crop/: Extracted defect patch crops used for rectification.Project StructureDMGR/
+├── Gen.py                     # Main generation script (implements Trajectory Rectification Loop)
+├── confs/                     # Configuration files
+│   └── pcb_gen.yml            # Main synthesis configuration
+├── guided_diffusion/          # Core implementation
+│   ├── ddim.py                # DMGR Sampler with Gradient Rectification logic
 │   ├── script_util.py         # Utility functions
-│   ├── gaussian_diffusion.py  # Base diffusion model
-│   └── unet.py                # U-Net architecture
-├── utils/                      # Utility modules
-│   ├── config.py              # Configuration management
+│   ├── gaussian_diffusion.py  # Base diffusion model wrapper
+│   └── unet.py                # U-Net architecture for Global/Local models
+├── utils/                     # Utility modules
+│   ├── loss.py                # Dynamic Multi-Scale Loss (Spectral Alignment)
+│   ├── gating.py              # Uncertainty-Adaptive Spatial Gating
 │   ├── logger.py              # Logging utilities
 │   └── drawer.py              # Visualization tools
-├── data/                       # Dataset and references
+├── data/                      # Dataset and references
 │   ├── pcb.json               # PCB dataset configuration
-│   └── Fig1.pdf               # Framework diagram
-├── checkpoint/                 # Model checkpoints
-│   ├── global-256.pt          # Global context model
-│   └── defect-patch-64.pt     # Local defect model
-└── images/                     # Generated outputs
-    └── fj_ddim/               # DMSC results
-```
-
-## Citation and License
-
-### Citation
-
-Please cite our work if you find this code useful for your research:
-
-```bibtex
-@article{luo2025dmsc,
-  title={Dual-Manifold Score Composition: High-Fidelity Synthesis for Enhanced Industrial Defect Detection},
+├── checkpoint/                # Model checkpoints
+│   ├── global-256.pt          # Global model
+│   └── defect-patch-64.pt     # Local model
+└── images/                    # Output directory
+CitationIf you find this code useful for your research, please cite our IEEE Access paper:@article{luo2024dmgr,
+  title={Dual-Manifold Gradient Rectification: Reconciling Topology and Texture in Industrial Anomaly Synthesis},
   author={Luo, Weihang and Huang, Jianxiongwen and Zhang, Zhijie and Zhang, Hongyi and Jiang, Huali and Gao, Xingen},
-  journal={Sensors},
-  year={2025},
-  publisher={MDPI}
+  journal={IEEE Access},
+  year={2024},
+  publisher={IEEE},
+  doi={10.1109/ACCESS.2024.0429000}
 }
-```
-
-
-This project is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license. The code is released for academic research use only. For commercial use, please contact the authors.
+This project is licensed under the CC BY-NC-SA 4.0 license.
