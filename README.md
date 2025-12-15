@@ -106,20 +106,6 @@ DMGR/
 
 ## Citation and License
 
-### Citation
-
-If you find this code useful for your research, please cite our paper published in **IEEE Access**:
-
-```bibtex
-@article{luo2024dmgr,
-  title={Dual-Manifold Gradient Rectification: Reconciling Topology and Texture in Industrial Anomaly Synthesis},
-  author={Luo, Weihang and Huang, Jianxiongwen and Zhang, Zhijie and Zhang, Hongyi and Jiang, Huali and Gao, Xingen},
-  journal={IEEE Access},
-  volume={12},
-  year={2024},
-  doi={10.1109/ACCESS.2024.0429000}
-}
-```
 
 This project is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license. The code is released for academic research use only. For commercial use, please contact the authors.
 
