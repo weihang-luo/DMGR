@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the official implementation of **"Dual-Manifold Gradient Rectification: Reconciling Topology and Texture in Industrial Anomaly Synthesis"**, published in **IEEE Access** [1].
+This repository contains the official implementation of **"Dual-Manifold Gradient Rectification: Reconciling Topology and Texture in Industrial Anomaly Synthesis"**.
 
 ### Key Contributions
 
