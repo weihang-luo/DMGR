@@ -104,12 +104,9 @@ DMGR/
     └── fj_ddim/                # DMGR results
 ```
 
-## Citation and License
+## License
 
 
 This project is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license. The code is released for academic research use only. For commercial use, please contact the authors.
-
-**References in README:**
-[1] W. Luo et al., "Dual-Manifold Gradient Rectification: Reconciling Topology and Texture in Industrial Anomaly Synthesis," IEEE Access, 2024.
 
 ```
